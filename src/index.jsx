@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Loader, Message, Segment } from 'semantic-ui-react';
-import 'whatwg-fetch';
+import 'isomorphic-fetch';
 import Promise from 'promise-polyfill';
 import SideMenu from './components/SideMenu';
 import View from './components/View';

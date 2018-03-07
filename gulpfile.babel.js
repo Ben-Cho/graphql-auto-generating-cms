@@ -73,7 +73,7 @@ gulp.task('build:middleware', () => {
           'env',
           {
             targets: {
-              node: '6.10',
+              node: '8.9',
             },
           },
         ],
