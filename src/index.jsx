@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Loader, Message, Segment } from 'semantic-ui-react';
-import 'isomorphic-fetch';
+import fetch from 'isomorphic-fetch';
 import Promise from 'promise-polyfill';
 import SideMenu from './components/SideMenu';
 import View from './components/View';
