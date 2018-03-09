@@ -68,12 +68,12 @@ gulp.task('build:middleware', () => {
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: [
-        'stage-0',
+        'stage-2',
         [
           'env',
           {
             targets: {
-              node: '8.9',
+              node: '6.10',
             },
           },
         ],

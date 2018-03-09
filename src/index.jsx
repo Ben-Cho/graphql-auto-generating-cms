@@ -265,7 +265,7 @@ class Layout extends Component {
         if (schema.resolvers.update) {
           this.query('mutation', req, resolver, data)
             .then(() => {
-              this.showSuccessMs;
+              this.showSuccessMs();
               this.getViewData(id);
             })
             .catch((err) => {
@@ -464,8 +464,7 @@ class Layout extends Component {
         case 'file':
           return document.getElementById(`${pr}${id}-p`).innerHTML;
         case 'selection':
-          return document.getElementById(`${pr}${id}`).firstChild
-            .selectedOptions;
+          return document.getElementById(`${pr}${id}`).querySelectorAll('a[value]');
         default:
           return document.getElementById(`${pr}${id}`).value;
       }
@@ -556,11 +555,11 @@ class Layout extends Component {
               prefix,
             );
             const valuesData = [];
-            Object.keys(selectValue).forEach((node) => {
+            selectValue.forEach((node) => {
               valuesData.push(
-                ref.state[`${propName}Data`][selectValue[node].value],
+                ref.state[`${propName}Data`][node.getAttribute('value')]
               );
-            });
+            })
             data[propName] = JSON.stringify(valuesData);
           }
         }
@@ -608,11 +607,11 @@ class Layout extends Component {
               prefix,
             );
             const valuesData = [];
-            Object.keys(selectValue).forEach((node) => {
+            selectValue.forEach((node) => {
               valuesData.push(
-                ref.state[`${propName}Data`][selectValue[node].value],
+                ref.state[`${propName}Data`][node.getAttribute('value')]
               );
-            });
+            })
             data.values[propName] = JSON.stringify(valuesData);
             data.types[propName] = 'String';
           } else if (id) {

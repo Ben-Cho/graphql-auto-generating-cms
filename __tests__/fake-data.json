@@ -7,7 +7,7 @@
           {
             "_id": "z8iuy0EMvrPFhklq",
             "couponCode": null,
-            "description": "get 99% discount ",
+            "description": "get 99% discount",
             "discountAmount": 99,
             "minimumAmount": 1
           }
@@ -19,7 +19,7 @@
         "coupon_find": [
           {
             "_id": "z8iuy0EMvrPFhklq",
-            "description": "get 99% discount "
+            "description": "get 99% discount"
           }
         ]
       }
@@ -970,14 +970,14 @@
   "data": {
     "_id": "z8iuy0EMvrPFhklq",
     "couponCode": null,
-    "description": "get 99% discount ",
+    "description": "get 99% discount",
     "discountAmount": 99,
     "minimumAmount": 1
   },
   "listD": [
     {
       "_id": "z8iuy0EMvrPFhklq",
-      "description": "get 99% discount "
+      "description": "get 99% discount"
     }
   ]
 }

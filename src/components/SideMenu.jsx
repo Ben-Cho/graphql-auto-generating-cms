@@ -70,6 +70,17 @@ class SideMenu extends Component {
             >
               {item.label}
             </Menu.Item>))}
+          <Menu.Item
+            className="github"
+            href="https://github.com/sarkistlt/graphql-auto-generating-cms"
+            target="_blink"
+          >
+            <Button
+              inverted
+              content="GitHub"
+              icon="github"
+            />
+          </Menu.Item>
         </Menu>
         <Dropdown
           as={Grid.Column}

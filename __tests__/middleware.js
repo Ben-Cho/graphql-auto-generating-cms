@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import printedSchema from '../example/src/schema';
-import CMSConfig from '../example/src/cms_config';
+import printedSchema from '../example/schema';
+import CMSConfig from '../example/cms_config';
 import {printSchema, parse} from 'graphql';
 import {
   applyRules,
@@ -37,7 +37,7 @@ describe('graphqlCMS:middleware', () => {
       let fixedPath1 = fixPath('public/src'),
         fixedPath2 = fixPath('/public/src/'),
         fixedPath3 = fixPath('public/src/');
-      
+
       expect(fixedPath1).to.be.a('string').and.to.be.equal('/public/src');
       expect(fixedPath2).to.be.a('string').and.to.be.equal('/public/src');
       expect(fixedPath3).to.be.a('string').and.to.be.equal('/public/src');
@@ -85,7 +85,7 @@ describe('graphqlCMS:middleware', () => {
       Queries.fields.forEach(graphqlType => {
         let typeName = graphqlType.type.type.name.value,
           fields = getFields({ schema, typeName, rules });
-        
+
         for (let key in fields) {
           if (fields.hasOwnProperty(key)) {
             expect(fields[key]).to.be.an('object').and.to.have.all.keys(
@@ -125,11 +125,11 @@ describe('graphqlCMS:middleware', () => {
       Queries.fields.forEach(graphqlType => {
         let typeName = graphqlType.type.type.name.value,
             fields = getFields({ schema, typeName, rules });
-        
+
         for (let key in fields) {
           if (fields.hasOwnProperty(key) && fields[key].list) {
             let listSchema = getTypeListData({ schema, rules, typeName: fields[key].fieldType });
-            
+
             expect(listSchema).to.be.an('object').and.to.have.all.keys(
               'label',
               'propTypeName',
@@ -154,7 +154,7 @@ describe('graphqlCMS:middleware', () => {
           create = checkMethodPermission({ rules, typeName, method: 'create', mutations: Mutations }),
           update = checkMethodPermission({ rules, typeName, method: 'update', mutations: Mutations }),
           remove = checkMethodPermission({ rules, typeName, method: 'remove', mutations: Mutations });
-        
+
         expect(find).to.be.a('boolean');
         expect(create).to.be.a('boolean');
         expect(update).to.be.a('boolean');
@@ -170,7 +170,7 @@ describe('graphqlCMS:middleware', () => {
           create = findResolverArgs({ typeName, method: 'create', fields: Mutations.fields, rules }),
           update = findResolverArgs({ typeName, method: 'update', fields: Mutations.fields, rules }),
           remove = findResolverArgs({ typeName, method: 'remove', fields: Mutations.fields, rules });
-        
+
         expect(find).to.be.an('object');
         expect(create).to.be.a('object');
         expect(update).to.be.a('object');
@@ -186,7 +186,7 @@ describe('graphqlCMS:middleware', () => {
           create = getResolverName(typeName, 'create', rules),
           update = getResolverName(typeName, 'update', rules),
           remove = getResolverName(typeName, 'remove', rules);
-        
+
         expect(find).to.be.a('string');
         expect(create).to.be.a('string');
         expect(update).to.be.a('string');
@@ -198,7 +198,7 @@ describe('graphqlCMS:middleware', () => {
     it('generate "shape" object for CMS', () => {
       let shape = graphqlCMS({ schema, rules, exclude, uploadRoot });
       expect(shape).to.be.an('object');
-  
+
     });
   });
   describe('func:applyRules', () => {

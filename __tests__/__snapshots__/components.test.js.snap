@@ -2,7 +2,7 @@
 
 exports[`Layout components 1`] = `
 <div
-  className="ui loading-block segment"
+  className="ui segment loading-block"
 >
   <div
     className="ui active dimmer"
@@ -18,10 +18,10 @@ exports[`Layout components 1`] = `
 
 exports[`List components 1`] = `
 <div
-  className="ui black View segment"
+  className="ui black segment View"
 >
   <table
-    className="ui celled List table"
+    className="ui celled table List"
   >
     <thead
       className=""
@@ -60,15 +60,17 @@ exports[`List components 1`] = `
         <td
           className=""
         >
-          get 99% discount 
+          get 99% discount
         </td>
         <td
           className=""
         >
           <button
             className="ui black button action-btn"
+            disabled={undefined}
             id="_id:z8iuy0EMvrPFhklq:String"
             onClick={[Function]}
+            role="button"
             tabIndex={undefined}
             type="submit"
           >
@@ -76,9 +78,11 @@ exports[`List components 1`] = `
           </button>
           <button
             className="ui black disabled button action-btn"
+            disabled={true}
             id="_id:z8iuy0EMvrPFhklq:String"
             onClick={[Function]}
-            tabIndex={undefined}
+            role="button"
+            tabIndex={-1}
             type="submit"
           >
             remove
@@ -98,21 +102,24 @@ exports[`List components 1`] = `
         >
           <button
             className="ui black button add-btn"
+            disabled={undefined}
             onClick={[Function]}
+            role="button"
             tabIndex={undefined}
             type="submit"
           >
             add new
           </button>
           <div
-            className="ui right floated pagination menu"
+            className="ui pagination right floated menu"
           >
             <a
               className="icon item"
               onClick={[Function]}
             >
               <i
-                className="disabled left chevron icon"
+                aria-hidden="true"
+                className="left chevron disabled icon"
               />
             </a>
             <a
@@ -120,7 +127,8 @@ exports[`List components 1`] = `
               onClick={[Function]}
             >
               <i
-                className="disabled right chevron icon"
+                aria-hidden="true"
+                className="right chevron disabled icon"
               />
             </a>
           </div>
@@ -174,60 +182,103 @@ exports[`SideMenu components 1`] = `
     >
       <button
         className="ui inverted button"
+        disabled={undefined}
         onClick={[Function]}
+        role="button"
         tabIndex={undefined}
       >
         <i
+          aria-hidden="true"
           className="github icon"
         />
-         
         GitHub
       </button>
     </a>
   </div>
   <div
-    className="tablet mobile only column ui button floating labeled icon mobile-nav dropdown"
+    aria-busy={undefined}
+    aria-disabled={undefined}
+    aria-expanded={false}
+    aria-multiselectable={undefined}
+    className="tablet only mobile only column ui button floating labeled dropdown icon mobile-nav"
     onBlur={[Function]}
     onChange={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
     onMouseDown={[Function]}
-    tabIndex="0"
+    role="listbox"
+    tabIndex={0}
   >
     <div
+      aria-live="polite"
       className="text"
+      role="alert"
     >
       NAVIGATION MENU
     </div>
     <i
+      aria-hidden="true"
       className="dropdown icon"
+      onClick={[Function]}
     />
     <div
       className="menu transition"
     >
       <div
+        aria-checked={undefined}
+        aria-disabled={undefined}
+        aria-selected={undefined}
         className="item"
         onClick={[Function]}
+        role="option"
       >
-        product
+        <span
+          className="text"
+        >
+          product
+        </span>
       </div>
       <div
+        aria-checked={undefined}
+        aria-disabled={undefined}
+        aria-selected={undefined}
         className="item"
         onClick={[Function]}
+        role="option"
       >
-        coupon
+        <span
+          className="text"
+        >
+          coupon
+        </span>
       </div>
       <div
+        aria-checked={undefined}
+        aria-disabled={undefined}
+        aria-selected={undefined}
         className="item"
         onClick={[Function]}
+        role="option"
       >
-        category
+        <span
+          className="text"
+        >
+          category
+        </span>
       </div>
       <div
+        aria-checked={undefined}
+        aria-disabled={undefined}
+        aria-selected={undefined}
         className="item"
         onClick={[Function]}
+        role="option"
       >
-        customer
+        <span
+          className="text"
+        >
+          customer
+        </span>
       </div>
     </div>
   </div>
@@ -237,14 +288,16 @@ exports[`SideMenu components 1`] = `
 exports[`View components 1`] = `
 <div>
   <div
-    className="ui black View segment"
+    className="ui black segment View"
   >
     <div
       className="btn-row"
     >
       <button
         className="ui black button"
+        disabled={undefined}
         onClick={[Function]}
+        role="button"
         tabIndex={undefined}
         type="submit"
       >
@@ -252,7 +305,9 @@ exports[`View components 1`] = `
       </button>
       <button
         className="ui black button"
+        disabled={undefined}
         onClick={[Function]}
+        role="button"
         tabIndex={undefined}
         type="submit"
       >
@@ -260,15 +315,18 @@ exports[`View components 1`] = `
       </button>
       <button
         className="ui black disabled button"
+        disabled={true}
         id="_id:z8iuy0EMvrPFhklq:String"
         onClick={[Function]}
-        tabIndex={undefined}
+        role="button"
+        tabIndex={-1}
         type="submit"
       >
         remove
       </button>
     </div>
     <form
+      action={undefined}
       className="ui form ui grid"
       onSubmit={[Function]}
     >
@@ -281,12 +339,16 @@ exports[`View components 1`] = `
           <div
             className="field"
           >
-            <label>
+            <label
+              htmlFor="_id"
+            >
               _id
             </label>
             <input
+              content={undefined}
               defaultChecked={false}
               defaultValue="z8iuy0EMvrPFhklq"
+              disabled={false}
               id="_id"
               onInput={[Function]}
               placeholder="_id"
@@ -305,12 +367,16 @@ exports[`View components 1`] = `
           <div
             className="field"
           >
-            <label>
+            <label
+              htmlFor="description"
+            >
               description
             </label>
             <input
+              content={undefined}
               defaultChecked={false}
-              defaultValue="get 99% discount "
+              defaultValue="get 99% discount"
+              disabled={false}
               id="description"
               onInput={[Function]}
               placeholder="description"
@@ -321,12 +387,16 @@ exports[`View components 1`] = `
           <div
             className="field"
           >
-            <label>
+            <label
+              htmlFor="discountAmount"
+            >
               discountAmount
             </label>
             <input
+              content={undefined}
               defaultChecked={false}
               defaultValue={99}
+              disabled={false}
               id="discountAmount"
               onInput={[Function]}
               placeholder="discountAmount"
@@ -341,12 +411,16 @@ exports[`View components 1`] = `
           <div
             className="field"
           >
-            <label>
+            <label
+              htmlFor="minimumAmount"
+            >
               minimumAmount
             </label>
             <input
+              content={undefined}
               defaultChecked={false}
               defaultValue={1}
+              disabled={false}
               id="minimumAmount"
               onInput={[Function]}
               placeholder="minimumAmount"
@@ -357,12 +431,16 @@ exports[`View components 1`] = `
           <div
             className="field"
           >
-            <label>
+            <label
+              htmlFor="expirationDate"
+            >
               expiration date
             </label>
             <input
+              content={undefined}
               defaultChecked={false}
               defaultValue="0NaN-aN-aN"
+              disabled={false}
               id="expirationDate"
               onInput={[Function]}
               placeholder="expirationDate"
@@ -373,12 +451,16 @@ exports[`View components 1`] = `
           <div
             className="disabled field"
           >
-            <label>
+            <label
+              htmlFor="createdAt"
+            >
               createdAt
             </label>
             <input
+              content={undefined}
               defaultChecked={false}
               defaultValue="0NaN-aN-aN"
+              disabled={true}
               id="createdAt"
               onInput={[Function]}
               placeholder="createdAt"
@@ -389,12 +471,16 @@ exports[`View components 1`] = `
           <div
             className="field"
           >
-            <label>
+            <label
+              htmlFor="updatedAt"
+            >
               updatedAt
             </label>
             <input
+              content={undefined}
               defaultChecked={false}
               defaultValue="0NaN-aN-aN"
+              disabled={false}
               id="updatedAt"
               onInput={[Function]}
               placeholder="updatedAt"
