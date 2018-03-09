@@ -3,6 +3,11 @@
 [![Build Status](https://travis-ci.org/sarkistlt/graphql-auto-generating-cms.svg?branch=master)](https://travis-ci.org/sarkistlt/graphql-auto-generating-cms)
 
 ![alt tag](https://github.com/sarkistlt/graphql-auto-generating-cms/blob/master/example/screenshots/Screen-Shot-2016-10-31-at-10.33.13-AM.png)
+
+# GraphQL CMS
+
+> ### This fork uses React 16.2.0 and all other latest packages as of (3/9/2018)
+
 GraphQL CMS will build a fully-functional CMS by just using your printed GraphQL schema without any changes in your existed code or architecture.
 
 **[Documentation](https://sarkistlt.gitbooks.io/graphql-cms/content/)**
@@ -32,3 +37,21 @@ import 'graphql-auto-generating-cms/lib/styles.css';
 ~~~sh
 <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.css" rel="stylesheet">
 ~~~
+
+### Development
+
+```
+npm run dev
+```
+
+### Demo
+
+```
+npm run example
+```
+
+### Test
+
+```
+npm run test
+```
