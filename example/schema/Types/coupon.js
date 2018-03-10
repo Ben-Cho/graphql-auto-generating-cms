@@ -5,7 +5,7 @@ const coupon = new GraphQLObjectType({
   description: 'Coupon schema',
   fields: {
     _id: { type: GraphQLString },
-    couponCode: { type: new GraphQLList(GraphQLString) },
+    couponCodes: { type: new GraphQLList(GraphQLString) },
     description: { type: GraphQLString },
     discountAmount: { type: GraphQLInt },
     minimumAmount: { type: GraphQLInt },

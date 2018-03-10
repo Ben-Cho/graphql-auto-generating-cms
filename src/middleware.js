@@ -63,7 +63,15 @@ const findResolverArgs = function funcFindResolverArgs(args) {
   }
   if (tmpObj && tmpObj.arguments) {
     tmpObj.arguments.forEach((argObj) => {
-      respond[argObj.name.value] = argObj.type.kind === 'NonNullType' ? `${argObj.type.type.name.value}!` : argObj.type.name.value;
+      if (argObj.type.kind === 'NonNullType') {
+        respond[argObj.name.value] = `${argObj.type.type.name.value}!`
+      }
+      else if (argObj.type.kind === 'ListType') {
+        respond[argObj.name.value] = `[${argObj.type.type.name.value}]`
+      }
+      else {
+        respond[argObj.name.value] = argObj.type.name.value;
+      }
     });
   }
   return respond;
@@ -198,6 +206,28 @@ const getFields = function funcGetFields(args) {
           nestedFields: has ? getFields({ schema, rules, typeName: prop.type.name.value }) : false,
         };
       }
+      // handles GraphQLNonNull
+      else if (
+        prop.name &&
+        prop.name.value &&
+        prop.type.type &&
+        prop.type.type.name &&
+        prop.type.type.name.value &&
+        prop.name.value !== 'Mutation' &&
+        prop.name.value !== 'Query'
+      ) {
+        const has = hasNestedFields(prop.type.type.name.value);
+        result[prop.name.value] = {
+          label: prop.name.value,
+          fieldType: prop.type.type.name.value,
+          inputType: has ? 'String' : resolveInputType(prop.type.type.name.value),
+          inputControl: resolveInputControl(prop.type.type.name.value),
+          disabled: false,
+          exclude: false,
+          list: false,
+          nestedFields: has ? getFields({ schema, rules, typeName: prop.type.type.name.value }) : false,
+        };
+      }
     } else if (
       prop &&
       prop.type &&
@@ -218,6 +248,30 @@ const getFields = function funcGetFields(args) {
         list: getTypeListData({ schema, rules, typeName: prop.type.type.name.value }),
         nestedFields: getFields({ schema, typeName: prop.type.type.name.value }),
       };
+    } else if ( // handles GraphQLList(String|Int|Boolean|Float)
+      prop &&
+      prop.type &&
+      prop.type.type &&
+      prop.type.type.name &&
+      prop.type.type.name.value &&
+      !isListOfType(prop.type.type.name.value) &&
+      prop.name.value !== 'Mutation' &&
+      prop.name.value !== 'Query'
+    ) {
+      const has = hasNestedFields(prop.type.type.name.value);
+      result[prop.name.value] = {
+        label: prop.name.value,
+        fieldType: prop.type.type.name.value,
+        inputType: has ? 'String' : resolveInputType(prop.type.type.name.value),
+        inputControl: resolveInputControl(prop.type.type.name.value),
+        disabled: false,
+        exclude: false,
+        list: true,
+        nestedFields: has ? getFields({ schema, rules, typeName: prop.type.type.name.value }) : false,
+      };
+    }
+    else {
+      console.log(JSON.stringify(prop, null, ' '))
     }
   });
   return result;
@@ -316,6 +370,7 @@ const graphqlCMS = function funcGraphqlCMS(args) {
       };
     }
   });
+
   shape = getListHeader({ shape });
   return shape;
 };

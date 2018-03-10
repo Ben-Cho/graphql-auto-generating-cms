@@ -1,9 +1,11 @@
+$theme-color: #3060b3;
+
 .loading-block {
   min-height: 100px !important;
   margin: 14px !important;
 
   .dimmer {
-    background: #b33086 !important;
+    background: $theme-color !important;
   }
 }
 
@@ -90,11 +92,11 @@
   }
 
   .button {
-    background: #b33086 !important;
+    background: $theme-color !important;
 
     &:hover,
     &:focus {
-      background: #be4f98 !important;
+      background: darken($theme-color, 10) !important;
     }
   }
 
@@ -103,7 +105,7 @@
     margin: 0 !important;
 
     .dimmer {
-      background: #b33086 !important;
+      background: $theme-color !important;
     }
   }
 
@@ -112,7 +114,7 @@
   }
 
   .ui.inverted.pointing.menu .active.item:after {
-    background-color: #be4f98 !important;
+    background-color: darken($theme-color, 10) !important;
   }
 
   .loading-block {
@@ -125,13 +127,14 @@
     padding: 0 !important;
 
     .SideMenu {
-      background: #b33086 !important;
+      background: $theme-color !important;
       margin: 0 !important;
       padding: 0 !important;
     }
 
     .mobile-nav {
       text-align: center !important;
+      display: block;
     }
   }
 
@@ -139,7 +142,7 @@
     box-shadow: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    border-top: 2px solid #b33086 !important;
+    border-top: 2px solid $theme-color !important;
 
     .selection {
       margin-bottom: 14px !important;
@@ -186,7 +189,7 @@
 
     .List {
       th {
-        color: #b33086 !important;
+        color: $theme-color !important;
       }
 
       tr {

@@ -6,6 +6,7 @@ import {
   Form,
   Grid,
   Icon,
+  Message,
   Modal,
   Popup,
   Segment,
@@ -21,6 +22,7 @@ import {
 //     PropTypes.object,
 //     PropTypes.bool,
 //   ]),
+//   dataErrors: PropTypes.array,
 //   fields: PropTypes.array,
 //   update: PropTypes.func,
 //   collectFieldsData: PropTypes.func,
@@ -35,6 +37,103 @@ import {
 // };
 import Editor from './Editor';
 import Markdown from './Markdown';
+
+class FormFieldList extends Component {
+  constructor({
+    defaultValue,
+  }) {
+    super();
+
+    this.addNewValue = this.addNewValue.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    // const parsedDefaultValue = JSON.parse()
+    this.state = {
+      values: defaultValue
+    };
+  }
+
+  getDefaultNewValue() {
+    const {
+      type
+    } = this.props;
+    switch (type || type.slice(0, -1)) {
+      case 'String':
+        return '';
+      case 'Int':
+        return 0;
+      case 'Float':
+        return 0.0;
+      case 'Boolean':
+        return true;
+      default:
+        return '';
+    }
+  }
+
+  addNewValue() {
+    this.state.values.push( this.getDefaultNewValue() );
+    this.setState({
+      values: this.state.values,
+    });
+  }
+
+  handleInputChange(idx, value) {
+    this.state.values[idx] = value;
+    this.setState({
+      values: this.state.values,
+    });
+  }
+
+  render() {
+    const {
+      label,
+      control,
+      type,
+      id,
+      defaultValue,
+      onInput,
+      disabled,
+      placeholder,
+    } = this.props;
+    return (
+      <div>
+        <label>
+          {label} <Icon name='add' onClick={this.addNewValue} color={'green'} />
+        </label>
+        <div id={id}>
+          {this.state.values.map((value, idx) => (
+            <Form.Field key={idx}>
+              <Form.Input
+                placeholder='First Name'
+                type={type}
+                value={this.state.values[idx]}
+                onInput={onInput}
+                disabled={disabled}
+                placeholder={placeholder}
+                action={
+                  <Button
+                    onClick={() => {
+                      this.state.values.splice(idx, 1);
+                      this.setState({
+                        values: this.state.values,
+                      })
+                    }}
+                    color='blue'
+                  >
+                    x
+                  </Button>
+                }
+                onChange={(event) => {
+                  this.handleInputChange(idx, event.target.value);
+                }}
+              />
+            </Form.Field>
+          ))}
+        </div>
+      </div>
+    )
+  }
+}
 
 class View extends Component {
   constructor(...args) {
@@ -53,6 +152,7 @@ class View extends Component {
       schema: this.props.schema,
       fields: this.props.fields,
       data: this.props.data,
+      dataErrors: this.props.dataErrors,
       currentItemId: this.props.currentItemId,
       popupImgLink: false,
     };
@@ -68,6 +168,7 @@ class View extends Component {
     // console.log(nextProps.data)
     this.setState({
       data: nextProps.data,
+      dataErrors: nextProps.dataErrors,
       currentItemId: nextProps.currentItemId,
     });
   }
@@ -327,6 +428,7 @@ class View extends Component {
     let dateInput = false;
     let disabled =
       typeof dis === 'boolean' ? dis : this.checkIfDisabled(fields, propName);
+    let required = /!$/.test('something')
     let control = fields[propName].inputControl;
     let DOM;
     if (
@@ -470,6 +572,21 @@ class View extends Component {
             onEdit={this.editText}
           />
         );
+      } else if (fields[propName].list === true) {
+        DOM = (
+          <FormFieldList
+            key={idx}
+            label={fields[propName].label}
+            control={control}
+            type={type}
+            id={`${pr}${propName}`}
+            defaultValue={value}
+            defaultChecked={checked}
+            onInput={this.checkOnEnterIfTextarea}
+            disabled={disabled}
+            placeholder={propName}
+          />
+        );
       } else {
         DOM = (
           <Form.Field
@@ -492,7 +609,7 @@ class View extends Component {
 
   render() {
     const { Column } = Grid;
-    const { fields, schema, currentItemId, data } = this.state;
+    const { fields, schema, currentItemId, data, dataErrors } = this.state;
     const { update, remove, addNewItem } = this.props;
     const { generateFields } = this;
     const to = (fields.length / 2).toFixed(0);
@@ -511,6 +628,30 @@ class View extends Component {
           />
         ) : null}
         <Segment color="black" className="View">
+          {dataErrors && dataErrors.length > 0 ? (
+            <Message
+              negative
+              compact
+              style={{
+                position: 'relative',
+                width: 'auto',
+                display: 'block',
+                left: 'auto',
+                top: 'auto',
+                textAlign: 'left',
+                margin: '10px',
+              }}
+            >
+              <Message.Header>Error with GraphQL Data Returned</Message.Header>
+              <ul>
+                {dataErrors.map(error => (
+                  <li key={error.message}>
+                    {error.message}
+                  </li>
+                ))}
+              </ul>
+            </Message>
+          ) : null}
           <div className="btn-row">
             {currentItemId ? (
               <Button

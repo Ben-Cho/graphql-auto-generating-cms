@@ -70,36 +70,39 @@ class SideMenu extends Component {
             >
               {item.label}
             </Menu.Item>))}
-          <Menu.Item
-            className="github"
-            href="https://github.com/sarkistlt/graphql-auto-generating-cms"
-            target="_blink"
-          >
-            <Button
-              inverted
-              content="GitHub"
-              icon="github"
-            />
-          </Menu.Item>
+          {this.props.showGithub ? (
+            <Menu.Item
+              className="github"
+              href="https://github.com/stevenkaspar/graphql-cms"
+              target="_blink"
+            >
+              <Button
+                inverted
+                content="GitHub"
+                icon="github"
+              />
+            </Menu.Item>
+          ): null}
         </Menu>
-        <Dropdown
-          as={Grid.Column}
-          text="NAVIGATION MENU"
-          floating
-          labeled
-          button
-          className="icon mobile-nav"
-          only="tablet mobile"
-        >
-          <Dropdown.Menu>
-            {items.map((item, idx) =>
-              (<Dropdown.Item
-                key={idx}
-                text={item.label}
-                onClick={e => handleMenuClick(e, { name: item.label })}
-              />))}
-          </Dropdown.Menu>
-        </Dropdown>
+        <Grid.Column only="mobile tablet" width={16}>
+          <Dropdown
+            text="NAVIGATION MENU"
+            floating
+            labeled
+            button
+            inline={false}
+            className="icon mobile-nav"
+          >
+            <Dropdown.Menu>
+              {items.map((item, idx) =>
+                (<Dropdown.Item
+                  key={idx}
+                  text={item.label}
+                  onClick={e => handleMenuClick(e, { name: item.label })}
+                />))}
+            </Dropdown.Menu>
+          </Dropdown>
+        </Grid.Column>
       </Grid>
     );
   }

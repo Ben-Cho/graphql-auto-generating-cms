@@ -31,7 +31,7 @@ export default {
     coupon: {
       fields: {
         _id: {},
-        couponCode: {},
+        couponCodes: {},
         description: {},
         discountAmount: {},
         minimumAmount: {},

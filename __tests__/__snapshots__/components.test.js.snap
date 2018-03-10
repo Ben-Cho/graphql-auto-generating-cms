@@ -174,111 +174,95 @@ exports[`SideMenu components 1`] = `
     >
       customer
     </a>
-    <a
-      className="item github"
-      href="https://github.com/sarkistlt/graphql-auto-generating-cms"
-      onClick={[Function]}
-      target="_blink"
-    >
-      <button
-        className="ui inverted button"
-        disabled={undefined}
-        onClick={[Function]}
-        role="button"
-        tabIndex={undefined}
-      >
-        <i
-          aria-hidden="true"
-          className="github icon"
-        />
-        GitHub
-      </button>
-    </a>
   </div>
   <div
-    aria-busy={undefined}
-    aria-disabled={undefined}
-    aria-expanded={false}
-    aria-multiselectable={undefined}
-    className="tablet only mobile only column ui button floating labeled dropdown icon mobile-nav"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onMouseDown={[Function]}
-    role="listbox"
-    tabIndex={0}
+    className="mobile only tablet only sixteen wide column"
   >
     <div
-      aria-live="polite"
-      className="text"
-      role="alert"
-    >
-      NAVIGATION MENU
-    </div>
-    <i
-      aria-hidden="true"
-      className="dropdown icon"
+      aria-busy={undefined}
+      aria-disabled={undefined}
+      aria-expanded={false}
+      aria-multiselectable={undefined}
+      className="ui button floating labeled dropdown icon mobile-nav"
+      onBlur={[Function]}
+      onChange={[Function]}
       onClick={[Function]}
-    />
-    <div
-      className="menu transition"
+      onFocus={[Function]}
+      onMouseDown={[Function]}
+      role="listbox"
+      tabIndex={0}
     >
       <div
-        aria-checked={undefined}
-        aria-disabled={undefined}
-        aria-selected={undefined}
-        className="item"
-        onClick={[Function]}
-        role="option"
+        aria-live="polite"
+        className="text"
+        role="alert"
       >
-        <span
-          className="text"
-        >
-          product
-        </span>
+        NAVIGATION MENU
       </div>
-      <div
-        aria-checked={undefined}
-        aria-disabled={undefined}
-        aria-selected={undefined}
-        className="item"
+      <i
+        aria-hidden="true"
+        className="dropdown icon"
         onClick={[Function]}
-        role="option"
-      >
-        <span
-          className="text"
-        >
-          coupon
-        </span>
-      </div>
+      />
       <div
-        aria-checked={undefined}
-        aria-disabled={undefined}
-        aria-selected={undefined}
-        className="item"
-        onClick={[Function]}
-        role="option"
+        className="menu transition"
       >
-        <span
-          className="text"
+        <div
+          aria-checked={undefined}
+          aria-disabled={undefined}
+          aria-selected={undefined}
+          className="item"
+          onClick={[Function]}
+          role="option"
         >
-          category
-        </span>
-      </div>
-      <div
-        aria-checked={undefined}
-        aria-disabled={undefined}
-        aria-selected={undefined}
-        className="item"
-        onClick={[Function]}
-        role="option"
-      >
-        <span
-          className="text"
+          <span
+            className="text"
+          >
+            product
+          </span>
+        </div>
+        <div
+          aria-checked={undefined}
+          aria-disabled={undefined}
+          aria-selected={undefined}
+          className="item"
+          onClick={[Function]}
+          role="option"
         >
-          customer
-        </span>
+          <span
+            className="text"
+          >
+            coupon
+          </span>
+        </div>
+        <div
+          aria-checked={undefined}
+          aria-disabled={undefined}
+          aria-selected={undefined}
+          className="item"
+          onClick={[Function]}
+          role="option"
+        >
+          <span
+            className="text"
+          >
+            category
+          </span>
+        </div>
+        <div
+          aria-checked={undefined}
+          aria-disabled={undefined}
+          aria-selected={undefined}
+          className="item"
+          onClick={[Function]}
+          role="option"
+        >
+          <span
+            className="text"
+          >
+            customer
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -360,9 +344,9 @@ exports[`View components 1`] = `
             className="field"
             defaultChecked={false}
             defaultValue=""
-            id="couponCode"
+            id="couponCodes"
             onInput={[Function]}
-            placeholder="couponCode"
+            placeholder="couponCodes"
           />
           <div
             className="field"

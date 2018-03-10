@@ -264,7 +264,7 @@ class Layout extends Component {
       } else if (data) {
         if (schema.resolvers.update) {
           this.query('mutation', req, resolver, data)
-            .then(() => {
+            .then((res) => {
               this.showSuccessMs();
               this.getViewData(id);
             })
@@ -362,24 +362,23 @@ class Layout extends Component {
   }
 
   validateFields(data) {
-    let response = true;
+    const errors = [];
     Object.keys(data.types).forEach((arg) => {
-      if (data.types[arg].slice(-1) === '!') {
+      if (/!/.test(data.types[arg])) {
         if (typeof data.values[arg] !== 'boolean' && !data.values[arg]) {
-          response = false;
+          errors.push(arg);
           this.showErrorMs();
           document.getElementById(arg).classList.add('error');
           document.getElementById(arg).parentNode.classList.add('error');
           document.getElementById(arg).placeholder = 'FIELD IS REQUIRED!';
         } else {
-          response = true;
           document.getElementById(arg).classList.remove('error');
           document.getElementById(arg).parentNode.classList.remove('error');
           document.getElementById(arg).placeholder = arg;
         }
       }
     });
-    return response;
+    return errors;
   }
 
   nextPage() {
@@ -450,16 +449,49 @@ class Layout extends Component {
     const schema = { ...this.state.currentPathSchema };
     let data = { values: {}, types: {} };
 
-    function getCurrentFieldData(id, type, prefix) {
+    function getCurrentFieldData(id, type, prefix, list = false) {
       const pr = prefix ? `${prefix}/` : '';
       switch (type || type.slice(0, -1)) {
         case 'Int':
+          if (list) {
+            const values = [];
+            const inputs = document.getElementById(`${pr}${id}`).querySelectorAll('input');
+            inputs.forEach((input) => {
+              values.push(Number(input.value))
+            })
+            return values;
+          }
           return Number(document.getElementById(`${pr}${id}`).value);
         case 'Float':
+          if (list) {
+            const values = [];
+            const inputs = document.getElementById(`${pr}${id}`).querySelectorAll('input');
+            inputs.forEach((input) => {
+              values.push(Number(input.value))
+            })
+            return values;
+          }
           return Number(document.getElementById(`${pr}${id}`).value);
         case 'Boolean':
+          if (list) {
+            const values = [];
+            const inputs = document.getElementById(`${pr}${id}`).querySelectorAll('input');
+            inputs.forEach((input) => {
+              values.push(input.checked)
+            })
+            return values;
+          }
           return document.getElementById(`${pr}${id}`).checked;
         case 'String':
+          if (list) {
+            const values = [];
+            const inputs = document.getElementById(`${pr}${id}`).querySelectorAll('input');
+            inputs.forEach((input) => {
+              values.push(input.value)
+            })
+            console.log(values)
+            return values;
+          }
           return document.getElementById(`${pr}${id}`).value;
         case 'file':
           return document.getElementById(`${pr}${id}-p`).innerHTML;
@@ -496,7 +528,7 @@ class Layout extends Component {
             Object.keys(field)[0],
             field[Object.keys(field)[0]].fieldType,
             propName,
-            prefix,
+            field[Object.keys(field)[0]].list,
           );
         } else {
           const key = Object.keys(field)[0];
@@ -523,6 +555,7 @@ class Layout extends Component {
       fields.forEach((fieldObj) => {
         const propName = Object.keys(fieldObj)[0];
         const type = fieldObj[propName].fieldType;
+        const list = fieldObj[propName].list;
         if (
           fieldObj[propName].nestedFields &&
           fieldObj[propName].inputControl !== 'selection'
@@ -539,12 +572,13 @@ class Layout extends Component {
             fieldObj[propName].inputType !== 'file' &&
             fieldObj[propName].inputControl !== 'selection'
           ) {
-            data[propName] = getCurrentFieldData(propName, type, prefix);
+            data[propName] = getCurrentFieldData(propName, type, prefix, list);
           } else if (fieldObj[propName].inputType === 'file') {
             data.values[propName] = getCurrentFieldData(
               propName,
               'file',
               prefix,
+              list,
             );
             data.types[propName] = 'String';
           } else if (fieldObj[propName].inputControl === 'selection') {
@@ -553,6 +587,7 @@ class Layout extends Component {
               propName,
               'selection',
               prefix,
+              list,
             );
             const valuesData = [];
             selectValue.forEach((node) => {
@@ -568,6 +603,7 @@ class Layout extends Component {
       fields.forEach((fieldObj) => {
         const propName = Object.keys(fieldObj)[0];
         const type = fieldObj[propName].fieldType;
+        const list = fieldObj[propName].list;
         if (
           fieldObj[propName].nestedFields &&
           fieldObj[propName].inputControl !== 'selection'
@@ -585,7 +621,7 @@ class Layout extends Component {
             fieldObj[propName].inputType !== 'file' &&
             fieldObj[propName].inputControl !== 'selection'
           ) {
-            data.values[propName] = getCurrentFieldData(propName, type, prefix);
+            data.values[propName] = getCurrentFieldData(propName, type, prefix, list);
             data.types[propName] = getCurrentFieldMutationType(
               propName,
               schema,
@@ -597,6 +633,7 @@ class Layout extends Component {
               propName,
               'file',
               prefix,
+              list,
             );
             data.types[propName] = 'String';
           } else if (fieldObj[propName].inputControl === 'selection') {
@@ -605,6 +642,7 @@ class Layout extends Component {
               propName,
               'selection',
               prefix,
+              list,
             );
             const valuesData = [];
             selectValue.forEach((node) => {
@@ -619,7 +657,7 @@ class Layout extends Component {
               data.values[id.split(':')[0]] = id.split(':')[1];
               data.types[id.split(':')[0]] = id.split(':')[2];
             } else {
-              data.values[propName] = getCurrentFieldData(propName, type);
+              data.values[propName] = getCurrentFieldData(propName, type, undefined, list);
               data.types[propName] = getCurrentFieldMutationType(
                 propName,
                 schema,
@@ -631,7 +669,10 @@ class Layout extends Component {
         }
       });
     }
-    if (action && this.validateFields(data)) {
+    if (this.validateFields(data).length > 0) {
+      return false
+    }
+    if (action) {
       return data;
     }
     return data;
@@ -783,6 +824,9 @@ class Layout extends Component {
       handleNewMenuClick,
       collectFieldsData,
     } = this;
+    const {
+      showGithub
+    } = this.props;
     let newMenuItems = false;
     if (this.props.newMenuItems) {
       newMenuItems = this.props.newMenuItems;
@@ -816,6 +860,7 @@ class Layout extends Component {
             items={SideMenuItems}
             handleNewMenuClick={handleNewMenuClick}
             routeToList={routeToList}
+            showGithub={showGithub}
           />
         </Column>
         <Message color="green" id="ms-success">
@@ -842,6 +887,11 @@ class Layout extends Component {
                     : viewData.data[resolverForList][0]
                       ? viewData.data[resolverForList][0]
                       : viewData.data[resolverForList]
+                }
+                dataErrors={
+                  !viewData.errors
+                    ? []
+                    : viewData.errors
                 }
                 fields={fields}
                 update={update}

@@ -38,6 +38,15 @@ import 'graphql-auto-generating-cms/lib/styles.css';
 <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.css" rel="stylesheet">
 ~~~
 
+### Adding a Field Debugging
+
+| Issue | Solution |
+|:--|:--|
+| Field not showing in workspace| Add to GraphQL Schema for TYPE |
+| Field showing in workspace, but disabled| Add to GraphQL Mutation for `TYPE_create` or `TYPE_update` |
+
+---
+
 ### Development
 
 ```

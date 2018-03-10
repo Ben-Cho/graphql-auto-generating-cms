@@ -1,4 +1,11 @@
-import { GraphQLBoolean, GraphQLInt, GraphQLObjectType, GraphQLString } from 'graphql';
+import {
+  GraphQLBoolean,
+  GraphQLInt,
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLNonNull,
+  GraphQLList,
+} from 'graphql';
 import { category, coupon, customer, product } from './Types';
 import { Category, Coupon, Customer, Product } from './Resolvers';
 
@@ -9,7 +16,7 @@ const mutations = new GraphQLObjectType({
       type: category,
       description: 'add new category',
       args: {
-        name: { type: GraphQLString },
+        name: { type: new GraphQLNonNull(GraphQLString) },
         createdAt: { type: GraphQLString },
         updatedAt: { type: GraphQLString },
       },
@@ -20,7 +27,7 @@ const mutations = new GraphQLObjectType({
       description: 'update category',
       args: {
         _id: { type: GraphQLString },
-        name: { type: GraphQLString },
+        name: { type: new GraphQLNonNull(GraphQLString) },
         updatedAt: { type: GraphQLString },
       },
       resolve: (_, args) => Category.update(args),
@@ -38,7 +45,7 @@ const mutations = new GraphQLObjectType({
       type: coupon,
       description: 'add new coupon',
       args: {
-        couponCode: { type: GraphQLString },
+        couponCodes: { type: new GraphQLList(GraphQLString) },
         description: { type: GraphQLString },
         discountAmount: { type: GraphQLInt },
         minimumAmount: { type: GraphQLInt },
@@ -53,7 +60,7 @@ const mutations = new GraphQLObjectType({
       description: 'update coupon',
       args: {
         _id: { type: GraphQLString },
-        couponCode: { type: GraphQLString },
+        couponCodes: { type: new GraphQLList(GraphQLString) },
         description: { type: GraphQLString },
         discountAmount: { type: GraphQLInt },
         minimumAmount: { type: GraphQLInt },

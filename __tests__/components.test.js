@@ -60,6 +60,7 @@ test('View components', () => {
     <View
       query={()  => {}}
       data={json.data}
+      dataErrors={json.dataErrors}
       fields={fields}
       update={() => {}}
       remove={() => {}}

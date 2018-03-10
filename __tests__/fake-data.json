@@ -6,7 +6,7 @@
         "coupon_find": [
           {
             "_id": "z8iuy0EMvrPFhklq",
-            "couponCode": null,
+            "couponCodes": null,
             "description": "get 99% discount",
             "discountAmount": 99,
             "minimumAmount": 1
@@ -324,7 +324,7 @@
             "list": false,
             "nestedFields": false
           },
-          "couponCode": {},
+          "couponCodes": {},
           "description": {
             "label": "description",
             "fieldType": "String",
@@ -409,7 +409,7 @@
           "create": {
             "resolver": "coupon_create",
             "args": {
-              "couponCode": "String",
+              "couponCodes": "String",
               "description": "String",
               "discountAmount": "Int",
               "minimumAmount": "Int",
@@ -423,7 +423,7 @@
             "resolver": "coupon_update",
             "args": {
               "_id": "String",
-              "couponCode": "String",
+              "couponCodes": "String",
               "description": "String",
               "discountAmount": "Int",
               "minimumAmount": "Int",
@@ -730,7 +730,7 @@
         "create": {
           "resolver": "coupon_create",
           "args": {
-            "couponCode": "String",
+            "couponCodes": "String",
             "description": "String",
             "discountAmount": "Int",
             "minimumAmount": "Int",
@@ -744,7 +744,7 @@
           "resolver": "coupon_update",
           "args": {
             "_id": "String",
-            "couponCode": "String",
+            "couponCodes": "String",
             "description": "String",
             "discountAmount": "Int",
             "minimumAmount": "Int",
@@ -768,7 +768,7 @@
           }
         },
         {
-          "couponCode": {}
+          "couponCodes": {}
         },
         {
           "description": {
@@ -891,7 +891,7 @@
         }
       },
       {
-        "couponCode": {}
+        "couponCodes": {}
       },
       {
         "description": {
@@ -969,7 +969,7 @@
   },
   "data": {
     "_id": "z8iuy0EMvrPFhklq",
-    "couponCode": null,
+    "couponCodes": null,
     "description": "get 99% discount",
     "discountAmount": 99,
     "minimumAmount": 1
