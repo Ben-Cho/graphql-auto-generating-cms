@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -25,7 +25,7 @@ const plugins = isDev ? [
   }),
   new webpack.HotModuleReplacementPlugin()
 ] : [
-  new CleanWebpackPlugin([path.resolve(__dirname, './example/public')]),
+  new CleanWebpackPlugin({ cleanAfterEveryBuildPatterns: [path.resolve(__dirname, './example/public')] }),
   new HtmlWebpackPlugin({
     filename: 'index.html',
     template: path.resolve(__dirname, './example/index.html'),
