@@ -26,7 +26,7 @@ class Editor extends Component {
     this.setState({ code: this.state.element.value });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.element !== this.state.element) {
       this.setState({
         code: nextProps.element ? nextProps.element.value : '',

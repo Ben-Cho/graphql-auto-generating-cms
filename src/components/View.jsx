@@ -159,12 +159,12 @@ class View extends Component {
     this.initStatesForSelector(this.props.fields);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { fields, data } = this.state;
     this.getSelectData(fields, data);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // console.log(nextProps.data)
     this.setState({
       data: nextProps.data,

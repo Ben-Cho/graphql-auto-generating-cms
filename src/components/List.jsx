@@ -24,7 +24,7 @@ class List extends Component {
     };
   }
 
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     this.setState({
       schema: this.props.schema,
       data: this.props.data,

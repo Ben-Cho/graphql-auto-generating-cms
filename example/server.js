@@ -1,4 +1,4 @@
-import graphQLHTTP from 'express-graphql';
+import { graphqlHTTP } from 'express-graphql';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpack from 'webpack';
 import express from 'express';
@@ -33,7 +33,7 @@ else {
 // running graphqlCMS middleware
 app.use('/graphql_cms_endpoint', graphqlCMS(CMSConfig));
 // running graphQL API endpoint
-app.use('/graphql', graphQLHTTP({ schema, graphiql: true, pretty: true }));
+app.use('/graphql', graphqlHTTP({ schema, graphiql: true, pretty: true }));
 // running server on http://localhost:7700/
 
 app.listen(7700, function () {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Loader, Message, Segment } from 'semantic-ui-react';
 import fetch from 'isomorphic-fetch';
-import Promise from 'promise-polyfill';
 import SideMenu from './components/SideMenu';
 import View from './components/View';
 import List from './components/List';
@@ -22,6 +21,7 @@ if (!window.Promise) {
 // };
 
 class Layout extends Component {
+  listLimit = 10
   constructor(...args) {
     super(...args);
     this.query = this.query.bind(this);
@@ -54,7 +54,7 @@ class Layout extends Component {
       SideMenuItems: false,
       viewMode: false,
       currentItemId: false,
-      limit: 50,
+      limit: this.listLimit,
       offset: 0,
       lastPage: false,
       fields: false,
@@ -158,7 +158,7 @@ class Layout extends Component {
         this.setState(
           {
             listData: res,
-            lastPage: res.data[resolver].length < 50,
+            lastPage: res.data[resolver].length < this.listLimit,
           },
           this.forceUpdate,
         );
@@ -386,7 +386,7 @@ class Layout extends Component {
     if (!lastPage) {
       this.setState(
         {
-          offset: offset + 50,
+          offset: offset + this.listLimit,
         },
         this.getListData,
       );
@@ -398,7 +398,7 @@ class Layout extends Component {
     if (offset) {
       this.setState(
         {
-          offset: offset - 50,
+          offset: offset - this.listLimit,
         },
         this.getListData,
       );
@@ -428,7 +428,7 @@ class Layout extends Component {
         listData: false,
         currentPathSchema: false,
         currentItemId: false,
-        limit: 50,
+        limit: this.listLimit,
         fields: false,
         offset: 0,
       },
@@ -688,7 +688,7 @@ class Layout extends Component {
         currentPathName: false,
         viewMode: false,
         currentItemId: false,
-        limit: 50,
+        limit: this.listLimit,
         offset: 0,
         lastPage: false,
       },

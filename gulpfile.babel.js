@@ -1,8 +1,10 @@
 import gulp from 'gulp';
-import sass from 'gulp-sass';
 import babel from 'gulp-babel';
 import del from 'del';
 import sourcemaps from 'gulp-sourcemaps';
+import dartSass from 'sass'
+import gulpSass from 'gulp-sass'
+const sass = gulpSass(dartSass)
 
 function clean(str) {
   return del([`./lib${str}`]);
@@ -68,9 +70,8 @@ gulp.task('build:middleware', () => {
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: [
-        'stage-2',
         [
-          'env',
+          '@babel/preset-env',
           {
             targets: {
               node: '6.10',
@@ -79,16 +80,27 @@ gulp.task('build:middleware', () => {
         ],
       ],
       plugins: [
-        'transform-flow-comments',
+        "@babel/plugin-transform-flow-comments",
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-syntax-import-meta",
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-json-strings",
+        [
+          "@babel/plugin-proposal-decorators",
+          {
+            "legacy": true
+          }
+        ],
+        "@babel/plugin-proposal-function-sent",
+        "@babel/plugin-proposal-export-namespace-from",
+        "@babel/plugin-proposal-numeric-separator",
+        "@babel/plugin-proposal-throw-expressions"
       ],
       babelrc: false,
       env: {
         production: {
           presets: [
-            'flow',
-          ],
-          plugins: [
-            'remove-comments',
+            '@babel/preset-flow',
           ],
           comments: false,
           compact: true,

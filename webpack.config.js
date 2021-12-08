@@ -23,7 +23,6 @@ const plugins = isDev ? [
   new webpack.DefinePlugin({
     NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
   }),
-  new webpack.NamedModulesPlugin(),
   new webpack.HotModuleReplacementPlugin()
 ] : [
   new CleanWebpackPlugin([path.resolve(__dirname, './example/public')]),
@@ -44,6 +43,9 @@ module.exports = {
     extensions: ['.js','.jsx','.json'],
   },
   devtool: isDev ? 'inline-source-map' : false,
+  optimization: isDev ? {
+    moduleIds: 'named'
+  } : undefined,
   plugins: plugins,
   output: {
     filename: '[name].js',
